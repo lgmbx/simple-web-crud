@@ -1,0 +1,51 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Default.master.cs" Inherits="simple_web_crud.Default" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <link href="~/css/basic-style.css" rel="stylesheet" />
+</head>
+
+
+
+
+<body>
+    <form id="form1" runat="server">
+
+        <!--header-->
+        <div class="content-wrapper">
+            <div class="cabecalho">
+                <!--name-->
+                <div class="menu">
+                    <h1>Simple Web CRUD</h1>
+                </div>
+            </div>
+        </div>
+
+
+        <!--content-->
+        <div class="conteudo content-wrapper">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+
+
+
+        <!--footer-->
+        <div class="content-wrapper rodape">
+            <h5>Simple web crud to learn about the relation between objects and database without any framework</h5>
+        </div>
+
+    </form>
+</body>
+
+
+
+
+    
+</html>

@@ -1,0 +1,270 @@
+﻿* {
+			-webkit-box-sizing: border-box !important; /* Safari/Chrome */
+			-moz-box-sizing: border-box !important; /* Firefox */
+			box-sizing: border-box !important; /* IE8+/ Opera */
+}
+
+h1, h2, h3, h4, h5, h6 {
+			margin: 0;
+			padding: 0;
+}
+
+body {
+			margin: 0;
+			font-family: Arial, Helvetica, sans-serif;
+			font-size: 14px;
+			text-align: left;
+			line-height: 150%; /* define a altura da linha de texto */
+			color: #333333;
+			background-color:white;
+}
+
+/**************************************** 
+			RECURSOS PARA LAYOUT EM COLUNAS 
+*****************************************/
+/* determina a largura máxima da área para exibir conteúdo */
+.content-wrapper{
+			margin:0 auto;
+		 max-width:1200px;
+}
+
+/* Linha para criar as colunas */
+.row {
+			display: flex;
+			display: -webkit-flex; /* Safari */
+			flex-wrap: wrap;
+			flex-direction: row;
+}
+
+.col-12 {
+			width: 100%;
+}
+
+.col-11 {
+			width: 91.66666666%;
+}
+
+.col-10 {
+			width: 83.3333333%;
+}
+
+.col-9 {
+			width: 75%;
+}
+
+.col-8 {
+			width: 66.66666667%;
+}
+
+.col-7 {
+			width: 58.33333333%;
+}
+
+.col-6 {
+			width: 50%;
+}
+
+.col-5 {
+			width: 41.66666667%;
+}
+
+.col-4 {
+			width: 33.33333333%;
+}
+
+.col-3 {
+			width: 25%;
+}
+
+.col-2 {
+			width: 16.66666667%;
+}
+
+.col-1 {
+		width:8.33333333%;
+}
+
+/*****************************************/
+/* ESTRUTURA BÁSICA DA MASTER PAGE       */
+/*****************************************/
+
+/* CABEÇALHO */
+.cabecalho {
+			height: 60px;
+			width:100%;
+			border-bottom: 1px solid #a1a1a1;
+			position:relative;
+}
+
+.logomarca{
+			width:80px;
+			height:80px;
+			position:absolute;
+			top:0;
+			left:0;
+}
+
+.menu{
+			height:30px;
+			position:absolute;
+			bottom:4px;
+			left:10px;
+}
+
+.menu a{
+			color:#333333;
+			font-size:14px;
+			margin-left:4px;
+			margin-right:4px;
+			text-decoration:none;
+			border-bottom:3px solid transparent;
+}
+
+.menu a:hover{
+			color:black;
+			border-bottom:3px solid black;
+}
+
+/* CONTEÚDO */
+.conteudo{
+			margin-top: 10px;
+			min-height:800px;
+}
+
+/* RODAPÉ */
+.rodape {
+			border-top: 1px solid #a1a1a1;
+			height:50px;
+			background-color:white;
+			padding:10px;
+}
+
+/*****************************************/
+/* CLASSES DIVERSAS                      */
+/*****************************************/
+
+.margin-top-100px{
+	margin-top:100px;
+}
+.margin-top-60px {
+	margin-top: 60px;
+}
+.margin-top-10px {
+	margin-top: 10px;
+}
+
+.box-padding-sides-20px {
+	padding: 0 10px;
+}
+
+.box-padding-right-20px {
+	padding-right: 20px;
+}
+.box-padding-left-20px {
+	padding-left: 20px;
+}
+
+.box-padding-30px{
+	padding: 30px;
+}
+
+.box-border{
+	border:1px solid #a1a1a1;
+}
+
+
+
+/*******************************************************************
+CONTROLES DE FORMULÁRIOS
+********************************************************************/
+
+
+.button-save {
+	min-width: 94px;
+	border: 1px solid #c0c0c0;
+	border-radius: 4px;
+	color: white;
+	font-weight: 500;
+	background-color: #18b952;
+	font-size: 16px;
+	padding: 10px 20px;
+}
+.button-update {
+	min-width: 94px;
+	border: 1px solid #c0c0c0;
+	border-radius: 4px;
+	color: white;
+	font-weight: 500;
+	background-color: #fc8c2d;
+	font-size: 16px;
+	padding: 10px 20px;
+}
+.button-delete {
+	min-width: 94px;
+	border: 1px solid #c0c0c0;
+	border-radius: 4px;
+	color: white;
+	font-weight: 500;
+	background-color: #f83b3b;
+	font-size: 16px;
+	padding: 10px 20px;
+}
+
+.button-hsave:hover {
+	background-color: #149844;
+	color: black;
+}
+.button-hupdate:hover {
+	background-color: #de7b27;
+	color: black;
+}
+.button-hdelete:hover {
+	background-color: #d33535;
+	color: black;
+}
+
+label{
+			margin-top:20px;
+			display:block;
+			max-width:100%;
+			font-size:12px;
+			text-transform:uppercase;
+}
+
+input[type="text"],
+input[type="password"],
+textarea,
+select {
+			border: 1px solid #d7d7d7;
+			border-radius: 4px;
+			background: rgba(255, 255, 255, 0.8);
+			color: #555;
+			font-size: 16px;
+			display: block;
+			padding: 10px;
+			resize: none;
+			margin-bottom: 16px;
+			width: 100%;
+}
+/*
+input[type="submit"],
+input[type="button"],
+button {
+			min-width: 94px;
+			border: 1px solid #c0c0c0;
+			border-radius: 4px;
+			color:white;
+			background-color: #405ff2;
+			font-size: 16px;
+			padding: 10px 20px;
+			
+
+}
+
+			input[type="submit"]:hover,
+			input[type="button"]:hover,
+			button:hover {
+						background-color: #2b3d93;
+						color: white;
+			}
+	*/
