@@ -38,7 +38,7 @@
 
         <!--footer-->
         <div class="content-wrapper rodape">
-            <h5>Simple web crud to learn about the relation between objects and database without any framework</h5>
+            <h5>Simple web crud to learn about database without any framework</h5>
         </div>
 
     </form>

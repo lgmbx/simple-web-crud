@@ -178,6 +178,15 @@ body {
 CONTROLES DE FORMULÁRIOS
 ********************************************************************/
 
+.button-select {
+	width: 53px;
+	height: 21;
+	border: 1px solid #c0c0c0;
+	border-radius: 4px;
+	
+	background-color: #c0c0c0;
+	
+}
 
 .button-save {
 	min-width: 94px;

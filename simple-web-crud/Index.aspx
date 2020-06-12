@@ -13,10 +13,17 @@
             <label><strong>Product</strong></label>
             <asp:TextBox ID="Product" MaxLength="36" runat="server"></asp:TextBox>
         </div>
-
+        <div class ="col-2 box-padding-left-20px">
+            <label><strong>Price</strong></label>
+            <asp:TextBox ID="Price" MaxLength="36" runat="server"></asp:TextBox>
+        </div>
+        <div class ="col-2 box-padding-left-20px">
+            <label><strong>Quantity</strong></label>
+            <asp:TextBox ID="Quantity" MaxLength="36" runat="server"></asp:TextBox>
+        </div>
         <div class ="col-3 box-padding-left-20px">
             <label><strong>Category</strong></label>
-            <asp:TextBox ID="Category" MaxLength="36" runat="server"></asp:TextBox>
+            <asp:DropDownList ID="DropDownListCategory" runat="server"></asp:DropDownList>
         </div>
     </div>
 
@@ -38,7 +45,22 @@
     <!--GridView-->
     <div class="row margin-top-60px">
         <div class="col-6 box-border ">
-            <asp:GridView ID="GridView1" AutoGenerateColumns="true" HeaderStyle-BackColor="LightGray" CellPadding="8" Width="100%" BorderColor="Silver" runat="server"></asp:GridView>
+            
+            <asp:GridView ID="PageGridView" AutoGenerateColumns="false" HeaderStyle-BackColor="LightGray" CellPadding="8" Width="100%" BorderColor="Silver" runat="server">
+                <columns>
+                    <asp:BoundField DataField="IdProducts" HeaderText="Id" Visible="false"/>
+                    <asp:BoundField DataField="Name" HeaderText="Name" />
+                    <asp:BoundField DataField="Price" DataFormatString="{0:C}" HeaderText="Price " />
+                    <asp:BoundField DataField="Quantity" HeaderText="Quantity" />
+                    <asp:BoundField DataField="CategoryName" HeaderText="CategoryName" />
+                    <asp:TemplateField ItemStyle-Width="60">
+                        <ItemTemplate>
+                            <asp:Button ID="SelectButton" Text="Select" ControlStyle-CssClass="button-select"  OnClick="SelectButton_Click" CommandArgument='<%#Eval("IdProducts")%>' runat="server"/>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </columns>
+            </asp:GridView>
+            
         </div>
         
     </div>
