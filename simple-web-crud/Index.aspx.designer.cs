@@ -76,6 +76,24 @@ namespace simple_web_crud {
         protected global::System.Web.UI.WebControls.Button Delete;
 
         /// <summary>
+        /// LabelSelectedItem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelSelectedItem;
+
+        /// <summary>
+        /// SelectedIdText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label SelectedIdText;
+
+        /// <summary>
         /// PageGridView control.
         /// </summary>
         /// <remarks>

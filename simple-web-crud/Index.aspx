@@ -35,20 +35,27 @@
             <asp:Button CssClass="button-save button-hsave" OnClick="Save_Click" ID="Save" runat="server" Text=" Save " />
         </div>
         <div class="col-1">
-            <asp:Button CssClass="button-update button-hupdate" ID="Update" runat="server" Text="Update" />
+            <asp:Button CssClass="button-update button-hupdate" ID="Update" OnClick="Update_Click" runat="server" Text="Update" />
         </div>
         <div class="col-1">
             <asp:Button CssClass="button-delete button-hdelete" ID="Delete" runat="server" Text="Delete" />
         </div>
     </div>
 
-    <!--GridView-->
+    <!--Message label-->
     <div class="row margin-top-60px">
+        <asp:Label ID="LabelSelectedItem" CssClass="red-text" Text="" runat="server"></asp:Label>
+        <asp:Label Id="SelectedIdText" Text="" runat="server"></asp:Label>
+    </div>
+
+    <!--GridView-->
+    <div class="row" style="margin-top:5px">
+        
         <div class="col-6 box-border ">
             
             <asp:GridView ID="PageGridView" AutoGenerateColumns="false" HeaderStyle-BackColor="LightGray" CellPadding="8" Width="100%" BorderColor="Silver" runat="server">
                 <columns>
-                    <asp:BoundField DataField="IdProducts" HeaderText="Id" Visible="false"/>
+                    <asp:BoundField DataField="IdProducts" HeaderText="Id" Visible="true"/>
                     <asp:BoundField DataField="Name" HeaderText="Name" />
                     <asp:BoundField DataField="Price" DataFormatString="{0:C}" HeaderText="Price " />
                     <asp:BoundField DataField="Quantity" HeaderText="Quantity" />

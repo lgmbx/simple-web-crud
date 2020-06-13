@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Web;
+using System.Web.DynamicData;
 using System.Web.UI.WebControls;
 
 namespace simple_web_crud {
@@ -21,13 +22,15 @@ namespace simple_web_crud {
         /// <param name="ddl">DropDownList</param>
         public void Load(GridView gv, DropDownList ddl) {
             using (MySqlConnection conn = new MySqlConnection(connectionString)) {
-                string query1 = "SELECT IdProducts ,Name, Price, Quantity, CategoryName FROM products, category WHERE products.CategoryId = category.Id";
+
+
+                string query1 = "SELECT IdProducts ,Name, Price, Quantity, CategoryName FROM products, category WHERE products.CategoryId = category.Id ORDER BY IdProducts";
                 string query2 = "Select * FROM category";
 
                 using (MySqlCommand cmd = new MySqlCommand(query1)) {
                     cmd.Connection = conn;
                     conn.Open();
-                    
+
                     using (DataTable dt = new DataTable()) {
                         dt.Load(cmd.ExecuteReader());
                         gv.DataSource = dt;
@@ -45,9 +48,9 @@ namespace simple_web_crud {
                     }
                 }
 
+
             }
         }
-
 
 
         /// <summary>
@@ -57,40 +60,56 @@ namespace simple_web_crud {
         /// <param name="pprice">product price</param>
         /// <param name="pquantity">product quantity</param>
         /// <param name="ddl">dropdownlist category</param>
-        public void AddProducts(TextBox pname, TextBox pprice, TextBox pquantity, DropDownList ddl) {
-            
+        public void AddOrUpdate(TextBox pname, TextBox pprice, TextBox pquantity, DropDownList ddl, Label labelSelectedItem, int id) {
+            string actualDdlValue = ddl.SelectedValue;
             using (MySqlConnection conn = new MySqlConnection(connectionString)) {
-                string command = $"INSERT INTO products (Name, Price, Quantity, CategoryId) VALUES ('{pname.Text}', '{float.Parse(pprice.Text, CultureInfo.InvariantCulture)}', '{pquantity.Text}' , '{ddl.SelectedValue}')";
+                string command;
+                if (labelSelectedItem.Text == "") {
+                    command = $"INSERT INTO products (Name, Price, Quantity, CategoryId) VALUES ('{pname.Text}', '{float.Parse(pprice.Text, CultureInfo.InvariantCulture)}', '{pquantity.Text}' , '{actualDdlValue}')";
+                }
+                else {
+                    command = $"UPDATE products, category SET Name='{pname.Text}', Price='{float.Parse(pprice.Text, CultureInfo.InvariantCulture)}', Quantity ='{pquantity.Text}', CategoryId = '{ddl.SelectedValue}', CategoryName='{ddl.SelectedItem.Text}' WHERE products.IdProducts = {id.ToString()} AND category.Id = {ddl.SelectedValue}";
+                }
 
                 using (MySqlCommand cmd = new MySqlCommand(command)) {
-
                     cmd.Connection = conn;
                     conn.Open();
                     int n = cmd.ExecuteNonQuery();
-
-
 
                 }
             }
         }
 
 
-        public void SelectProduct() {
+        public void SelectProduct(int selectedIdProduct, TextBox pname, TextBox pprice, TextBox pquantity, DropDownList ddl) {
+            using (MySqlConnection conn = new MySqlConnection(connectionString)) {
+                string command = $"SELECT Name, Price, Quantity, Id FROM products, category WHERE products.IdProducts = {selectedIdProduct} AND products.CategoryId = category.Id;";
+                using (MySqlCommand cmd = new MySqlCommand(command)) {
+                    cmd.Connection = conn;
+                    conn.Open();
+
+                    using (DataTable dt = new DataTable()) {
+                        dt.Load(cmd.ExecuteReader());
+                        pname.Text = dt.Rows[0]["Name"].ToString();
+                        pprice.Text = dt.Rows[0]["Price"].ToString();
+                        pquantity.Text = dt.Rows[0]["Quantity"].ToString();
+                        ddl.SelectedValue = dt.Rows[0]["Id"].ToString();
+
+
+                    }
+                }
+            }
+
+
+
+
+
 
         }
-
-
-        public void UpdateProducts() {
-
-        }
-
-
-
     }
+
+
 }
-
-
-
 
 
 
