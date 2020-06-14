@@ -25,7 +25,6 @@ namespace simple_web_crud {
         }
 
         protected void Save_Click(object sender, EventArgs e) {
-            SelectedIdItem = Convert.ToInt32(SelectedIdText.Text);
             m.AddOrUpdate(Product, Price, Quantity, DropDownListCategory, LabelSelectedItem, SelectedIdItem);
             m.Load(PageGridView, DropDownListCategory);
            
@@ -45,6 +44,8 @@ namespace simple_web_crud {
             SelectedIdItem = Convert.ToInt32(SelectedIdText.Text);
             m.AddOrUpdate(Product, Price, Quantity, DropDownListCategory, LabelSelectedItem, SelectedIdItem);
             m.Load(PageGridView, DropDownListCategory);
+            SelectedIdItem = 0;
+            SelectedIdText.Text = "";
 
         }
 
