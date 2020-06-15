@@ -15,7 +15,7 @@
         </div>
         <div class ="col-2 box-padding-left-20px">
             <label><strong>Price</strong></label>
-            <asp:TextBox ID="Price" MaxLength="36" runat="server"></asp:TextBox>
+            <asp:TextBox ID="Price" MaxLength="36" runat="server" Text='<%#Eval("{0:c}")%>'></asp:TextBox>
         </div>
         <div class ="col-2 box-padding-left-20px">
             <label><strong>Quantity</strong></label>
@@ -38,14 +38,14 @@
             <asp:Button CssClass="button-update button-hupdate" ID="Update" OnClick="Update_Click" runat="server" Text="Update" />
         </div>
         <div class="col-1">
-            <asp:Button CssClass="button-delete button-hdelete" ID="Delete" runat="server" Text="Delete" />
+            <asp:Button CssClass="button-delete button-hdelete" OnClick="Delete_Click" ID="Delete" runat="server" Text="Delete" />
         </div>
     </div>
 
     <!--Message label-->
     <div class="row margin-top-60px">
-        <asp:Label ID="LabelSelectedItem" CssClass="red-text" Text="" runat="server"></asp:Label>
-        <asp:Label Id="SelectedIdText" Text="" runat="server"></asp:Label>
+        <asp:Label ID="Message" CssClass="red-text" Text="" runat="server"></asp:Label>
+        <asp:Label Id="SelectedIdText" Visible="false" Text="" runat="server"></asp:Label>
     </div>
 
     <!--GridView-->
@@ -55,7 +55,7 @@
             
             <asp:GridView ID="PageGridView" AutoGenerateColumns="false" HeaderStyle-BackColor="LightGray" CellPadding="8" Width="100%" BorderColor="Silver" runat="server">
                 <columns>
-                    <asp:BoundField DataField="IdProducts" HeaderText="Id" Visible="true"/>
+                    <asp:BoundField DataField="IdProducts"  HeaderText="Id" Visible="false"/>
                     <asp:BoundField DataField="Name" HeaderText="Name" />
                     <asp:BoundField DataField="Price" DataFormatString="{0:C}" HeaderText="Price " />
                     <asp:BoundField DataField="Quantity" HeaderText="Quantity" />
