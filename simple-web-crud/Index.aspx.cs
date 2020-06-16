@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Security;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace simple_web_crud {
@@ -11,35 +6,38 @@ namespace simple_web_crud {
     public partial class Index : System.Web.UI.Page {
 
         MySqlConn m = new MySqlConn();
-        
+
         protected void Page_Load(object sender, EventArgs e) {
 
-           
+
 
             if (!IsPostBack) {
-                
+
                 m.Load(PageGridView, DropDownListCategory);
 
             }
-            
+
         }
 
         protected void Save_Click(object sender, EventArgs e) {
             //only works when theres no product selected
-            if(Product.Text == "" || Price.Text == "" || Quantity.Text == "") {
+            if (Product.Text == "" || Price.Text == "" || Quantity.Text == "") {
                 Message.Text = "You must fill all the blank fields before save a product";
             }
-            else {
+            else if(SelectedIdText.Text == "") {
                 m.AddOrUpdate(Product, Price, Quantity, DropDownListCategory, SelectedIdText, 0);
                 m.Load(PageGridView, DropDownListCategory);
                 Clear();
                 Message.Text = "Product saved!";
             }
-            
-           
-            
-                      
-            
+            else {
+                Message.Text = "You cannot save selected products";
+            }
+
+
+
+
+
         }
 
         protected void SelectButton_Click(object sender, EventArgs e) {
@@ -52,8 +50,8 @@ namespace simple_web_crud {
         }
 
         protected void Update_Click(object sender, EventArgs e) {
-            
-            if(SelectedIdText.Text == "") {
+
+            if (SelectedIdText.Text == "") {
                 Message.Text = "Select one product first";
             }
             else {
@@ -65,9 +63,9 @@ namespace simple_web_crud {
                 SelectedIdText.Text = "";
                 Message.Text = $"{PageGridView.Rows[id - 1].Cells[1].Text} Updated !";
                 Clear();
-                
+
             }
-           
+
 
         }
 
@@ -85,7 +83,7 @@ namespace simple_web_crud {
                 Message.Text = $"{item} DELETED !";
                 Clear();
             }
-            
+
 
 
         }
@@ -101,6 +99,6 @@ namespace simple_web_crud {
             Quantity.Text = "";
         }
 
-        
+
     }
 }

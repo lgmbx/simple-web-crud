@@ -1,12 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
 using System.Globalization;
-using System.Linq;
-using System.Web;
-using System.Web.DynamicData;
 using System.Web.UI.WebControls;
 
 namespace simple_web_crud {
@@ -14,7 +9,7 @@ namespace simple_web_crud {
 
         static readonly string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["SimpleWebCrud"].ToString();
 
-        
+
 
 
         /// <summary>
@@ -56,11 +51,10 @@ namespace simple_web_crud {
 
                 }
             }
-            catch (Exception) {
-
-                throw;
+            catch (Exception e) {
+                string error = e.Message;
             }
-            
+
         }
 
 
@@ -72,72 +66,97 @@ namespace simple_web_crud {
         /// <param name="pquantity">product quantity</param>
         /// <param name="ddl">dropdownlist category</param>
         public void AddOrUpdate(TextBox pname, TextBox pprice, TextBox pquantity, DropDownList ddl, Label selectedIdText, int id) {
-            string actualDdlValue = ddl.SelectedValue;
-            using (MySqlConnection conn = new MySqlConnection(connectionString)) {
-                string command;
-                if (selectedIdText.Text == "") {
-                    command = $"INSERT INTO products (Name, Price, Quantity, CategoryId) VALUES ('{pname.Text}', '{float.Parse(pprice.Text, CultureInfo.InvariantCulture)}', '{pquantity.Text}' , '{actualDdlValue}')";
-                }
-                else {
-                    command = $"UPDATE products, category SET Name='{pname.Text}', Price='{float.Parse(pprice.Text, CultureInfo.InvariantCulture)}', Quantity ='{pquantity.Text}', CategoryId = '{ddl.SelectedValue}', CategoryName='{ddl.SelectedItem.Text}' WHERE products.IdProducts = {id.ToString()} AND category.Id = {ddl.SelectedValue}";
-                }
 
-                using (MySqlCommand cmd = new MySqlCommand(command)) {
-                    cmd.Connection = conn;
-                    conn.Open();
-                    int n = cmd.ExecuteNonQuery();
+            try {
+                string actualDdlValue = ddl.SelectedValue;
+                using (MySqlConnection conn = new MySqlConnection(connectionString)) {
+                    string command;
+                    if (selectedIdText.Text == "") {
+                        command = $"INSERT INTO products (Name, Price, Quantity, CategoryId) VALUES ('{pname.Text}', '{float.Parse(pprice.Text, CultureInfo.InvariantCulture)}', '{pquantity.Text}' , '{actualDdlValue}')";
+                    }
+                    else {
+                        command = $"UPDATE products, category SET Name='{pname.Text}', Price='{float.Parse(pprice.Text, CultureInfo.InvariantCulture)}', Quantity ='{pquantity.Text}', CategoryId = '{ddl.SelectedValue}', CategoryName='{ddl.SelectedItem.Text}' WHERE products.IdProducts = {id.ToString()} AND category.Id = {ddl.SelectedValue}";
+                    }
 
+                    using (MySqlCommand cmd = new MySqlCommand(command)) {
+                        cmd.Connection = conn;
+                        conn.Open();
+                        int n = cmd.ExecuteNonQuery();
+
+                    }
                 }
             }
-            
+            catch (Exception e) {
+
+                string error = e.Message;
+            }
+
+
         }
 
 
 
         public void SelectProduct(int selectedIdProduct, TextBox pname, TextBox pprice, TextBox pquantity, DropDownList ddl) {
-            using (MySqlConnection conn = new MySqlConnection(connectionString)) {
-                string command = $"SELECT Name, Price, Quantity, Id FROM products, category WHERE products.IdProducts = {selectedIdProduct} AND products.CategoryId = category.Id;";
-                using (MySqlCommand cmd = new MySqlCommand(command)) {
-                    cmd.Connection = conn;
-                    conn.Open();
 
-                    using (DataTable dt = new DataTable()) {
-                        dt.Load(cmd.ExecuteReader());
-                        pname.Text = dt.Rows[0]["Name"].ToString();
-                        pprice.Text = dt.Rows[0]["Price"].ToString();
-                        pquantity.Text = dt.Rows[0]["Quantity"].ToString();
-                        ddl.SelectedValue = dt.Rows[0]["Id"].ToString();
+            try {
+                using (MySqlConnection conn = new MySqlConnection(connectionString)) {
+                    string command = $"SELECT Name, Price, Quantity, Id FROM products, category WHERE products.IdProducts = {selectedIdProduct} AND products.CategoryId = category.Id;";
+                    using (MySqlCommand cmd = new MySqlCommand(command)) {
+                        cmd.Connection = conn;
+                        conn.Open();
+
+                        using (DataTable dt = new DataTable()) {
+                            dt.Load(cmd.ExecuteReader());
+                            pname.Text = dt.Rows[0]["Name"].ToString();
+                            pprice.Text = dt.Rows[0]["Price"].ToString();
+                            pquantity.Text = dt.Rows[0]["Quantity"].ToString();
+                            ddl.SelectedValue = dt.Rows[0]["Id"].ToString();
 
 
+                        }
                     }
                 }
             }
+            catch (Exception e) {
 
-
-
-
-
-
-        }
-    
-    
-        public void Delete(int id) {
-            using(MySqlConnection conn = new MySqlConnection(connectionString)) {
-                string command = $"DELETE FROM products WHERE IdProducts = {id}; ALTER TABLE products AUTO_INCREMENT=1;";
-                using(MySqlCommand cmd = new MySqlCommand(command, conn)) {
-                    conn.Open();
-                    int n = cmd.ExecuteNonQuery();
-                }
+                string error = e.Message;
             }
 
+
+
+
+
+
+
         }
-    
-    
-       
-    
-    
-    
-    
+
+
+        public void Delete(int id) {
+            try {
+                using (MySqlConnection conn = new MySqlConnection(connectionString)) {
+                    string command = $"DELETE FROM products WHERE IdProducts = {id}; ALTER TABLE products AUTO_INCREMENT=1;";
+                    using (MySqlCommand cmd = new MySqlCommand(command, conn)) {
+                        conn.Open();
+                        int n = cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e) {
+
+                string error = e.Message;
+
+            }
+
+
+
+        }
+
+
+
+
+
+
+
     }
 
 
